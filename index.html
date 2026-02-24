@@ -6,48 +6,31 @@
     <title>Pit Strategy Calculator</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #0a0a0a;
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 20px;
-        }
-        .container { width: 100%; max-width: 400px; text-align: center; margin-top: 50px; }
-        .card { background: #1a1a1a; padding: 30px; border-radius: 15px; border: 1px solid #333; }
-        h1 { margin-bottom: 10px; font-size: 24px; color: #ff4444; }
-        p { color: #888; margin-bottom: 25px; font-size: 14px; }
-        .form-group { text-align: left; margin-bottom: 15px; }
-        label { display: block; font-size: 12px; margin-bottom: 5px; color: #aaa; }
-        input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #444; background: #222; color: white; }
-        .btn-red { width: 100%; padding: 12px; background: #cc0000; border: none; color: white; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px; }
-        .btn-red:hover { background: #ff4444; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); color: white; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        button { padding: 10px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+        .btn-danger { background: linear-gradient(to bottom, #ff4444, #cc0000); color: white; border: 2px solid #ff6666; }
+        .results { background: rgba(0, 0, 0, 0.8); border: 2px solid #ff4444; border-radius: 12px; padding: 20px; }
+        input, select { padding: 8px; border-radius: 8px; background: white; color: black; }
+        .modal { display: none; position: fixed; background: rgba(0, 0, 0, 0.8); width: 100%; height: 100%; top: 0; left: 0; }
+        @media (max-width: 768px) { .calculator { display: block; } }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <div class="card">
-            <h1>Pit Strategy Calculator</h1>
-            <p>Sign in to sync your data</p>
-            
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="loginEmail" placeholder="your@email.com">
-            </div>
-
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="loginPassword" placeholder="••••••••">
-            </div>
-
-            <button class="btn-red" onclick="alert('Connecting to Firebase...')">Sign In</button>
-            <button class="btn-red" style="background: transparent; border: 1px solid #444; margin-top: 8px;">Sign Up</button>
-        </div>
-    </div>
-
+    <div class="login-page active" id="loginPage">
+        <h1>Pit Strategy Calculator</h1>
+        <input type="email" id="loginEmail" placeholder="Email">
+        <button class="btn-danger" onclick="signIn()">Sign In</button>
+    /div>
+    <div class="main-app" id="mainApp">
+        <button class="btn-danger" onclick="signOut()">Sign Out</button>
+        <div id="resultsContainer"></div>
+    /div>
+    <script>
+        const firebaseConfig = { apiKey: "AIzaSyBMZJgCpDCNO0YmbJ2e11LvAQmYcdJMWgE", authDomain: "pitstratergyapp.firebaseapp.com", projectId: "pitstratergyapp", databaseURL: "https://pitstratergyapp-default-rtdb.firebaseio.com" };
+        function signIn() { document.getElementById('loginPage').classList.remove('active'); document.getElementById('mainApp').classList.add('active'); }
+        function signOut() { document.getElementById('mainApp').classList.remove('active'); document.getElementById('loginPage').classList.add('active'); }
+    </script>
 </body>
 </html>
